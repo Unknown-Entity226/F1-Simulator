@@ -1,0 +1,24 @@
+<main class="sim-layout">
+    <aside class="controls">
+        <h3>Race Config</h3>
+        <div class="input-group">
+            <label>Weather</label>
+            <select id="weather-type">
+                <option value="dry">Dry / Clear</option>
+                <option value="rain">Intermediates (Rain)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Wind: <span id="wind-display">10</span> km/h</label>
+            <input type="range" id="wind-speed" min="0" max="100" value="10">
+        </div>
+        <button id="launch-btn" class="btn-start">Launch Race</button>
+    </aside>
+
+    <section class="viewport">
+        <canvas id="raceCanvas"></canvas>
+        <div class="ai-prediction-overlay">
+            Probability of Win: <span id="prediction-pct">--%</span>
+        </div>
+    </section>
+</main>
