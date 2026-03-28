@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Digital Twin</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-
 <body>
-    <div id="f1-loader" class="loader-hidden">
+    <div id="f1-loader">
         <div class="race-track">
             <div class="f1-car">
                 <svg viewBox="0 0 120 40" class="f1-sprite">
@@ -29,13 +27,14 @@
         </div>
         <div class="loading-text">PREPARING DIGITAL TWIN...</div>
     </div>
+
     <header class="main-header">
         <div class="logo">F1 <span>DIGITAL TWIN</span></div>
         <nav>
             <ul>
-                <li><a href="index.html" class="nav-link" data-page="home">Home</a></li>
-                <li><a href="contact.html" class="nav-link" data-page="contact">Contact</a></li>
-                <li><a href="about-us.html" class="nav-link" data-page="about-us">About Us</a></li>
+                <li><a href="/" class="nav-link" data-page="home">Home</a></li>
+                <li><a href="/contact" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a href="/about-us" class="nav-link" data-page="about-us">About Us</a></li>
             </ul>
         </nav>
     </header>
@@ -49,7 +48,6 @@
         </div>
     </main>
 
-    <script src="app.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
-
 </html>
