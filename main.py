@@ -1,32 +1,22 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# 1. The Root Route: Serves the main SPA shell
-@app.route('/')
-def index():
-    """
-    Renders the main index.html which contains the header, 
-    loader, and the empty #content-area.
-    """
+# 1. The "Catch-All" Route
+# This ensures that if you reload on /simulator, it still sends index.html
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
+    # If the JS is asking for a fragment, serve the HTML snippet
+    if path.startswith('get-content/'):
+        page = path.replace('get-content/', '')
+        try:
+            return render_template(f'{page}.html')
+        except:
+            return "Fragment not found", 404
+            
+    # For everything else (Direct browser entry/reload), serve the main shell
     return render_template('index.html')
 
-@app.route('/<page>')
-def get_fragment(page):
-    """
-    This route handles requests like /simulator or /contact.
-    It looks for a file named {page}.html inside the /templates folder.
-    """
-    valid_fragments = ['about-us', 'contact', 'leader-board', 'live-events', 'simulator']
-    
-    if page in valid_fragments:
-        return render_template(f'{page}.html')
-    else:
-        abort(404)
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return "Telemetry Lost: This page does not exist.", 404
-
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True)

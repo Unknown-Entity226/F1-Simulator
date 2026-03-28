@@ -1,50 +1,52 @@
 document.addEventListener('DOMContentLoaded', () => {
     const contentArea = document.getElementById('content-area');
     const f1Loader = document.getElementById('f1-loader');
-
-    // Store initial dashboard HTML
     const homeHTML = contentArea.innerHTML;
 
-    // Helper to toggle loader visibility
     const setLoader = (active) => {
         if (active) f1Loader.classList.remove('loader-hidden');
         else f1Loader.classList.add('loader-hidden');
     };
 
-    async function loadPage(page) {
+    async function loadPage(page, updateURL = true) {
         setLoader(true);
 
-        // Handle Home/Dashboard
-        if (page === 'home') {
-            setTimeout(() => {
-                contentArea.innerHTML = homeHTML;
-                updateActiveLink('home');
-                setLoader(false);
-            }, 600); // Allow car animation to play
+        if (page === 'home' || page === '' || page === '/') {
+            contentArea.innerHTML = homeHTML;
+            updateActiveLink('home');
+            setTimeout(() => setLoader(false), 600);
             return;
         }
 
         try {
-            // Request the ROUTE from Flask, not the file path
-            const response = await fetch(`/${page}`);
-            if (!response.ok) throw new Error('Telemetry lost (Page not found)');
+            // We fetch from the special 'get-content' route to avoid infinite loops
+            const response = await fetch(`/get-content/${page}`);
+            if (!response.ok) throw new Error('Telemetry lost');
             
             const html = await response.text();
-
-            // Inject content
             contentArea.innerHTML = html;
             updateActiveLink(page);
 
-            // Re-init simulator if needed
+            if (updateURL) {
+                window.history.pushState({ page }, '', `/${page}`);
+            }
+
             if (page === 'simulator' && typeof initSimulator === 'function') {
                 initSimulator();
             }
         } catch (err) {
             contentArea.innerHTML = `<div class="error">PIT STOP ERROR: ${err.message}</div>`;
         } finally {
-            // Delay hiding the loader to ensure smooth transition
             setTimeout(() => setLoader(false), 800);
         }
+    }
+
+    // --- CRITICAL: Handle Reload Event ---
+    const initialPath = window.location.pathname.split('/').pop();
+    if (initialPath && initialPath !== 'index.html') {
+        loadPage(initialPath, false); // false so we don't push the same URL again
+    } else {
+        setLoader(false); // Hide loader if we are just on Home
     }
 
     function updateActiveLink(page) {
@@ -53,26 +55,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Click Delegation
     document.body.addEventListener('click', (e) => {
         const target = e.target.closest('[data-page]');
         if (target) {
             e.preventDefault();
-            const page = target.getAttribute('data-page');
-            
-            // Clean URL management for Flask
-            const url = page === 'home' ? '/' : `/${page}`;
-            window.history.pushState({ page }, '', url);
-            
-            loadPage(page);
+            loadPage(target.getAttribute('data-page'));
         }
     });
 
     window.onpopstate = (e) => {
         const page = (e.state && e.state.page) ? e.state.page : 'home';
-        loadPage(page);
+        loadPage(page, false);
     };
-
-    // Initial check: Hide loader once everything is ready
-    setTimeout(() => setLoader(false), 1000);
 });
