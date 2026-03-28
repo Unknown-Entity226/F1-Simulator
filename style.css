@@ -63,7 +63,6 @@ nav a:hover, nav a.active {
     color: var(--f1-red);
 }
 
-/* --- Main Layout --- */
 #content-area {
     display: flex;
     justify-content: center;
@@ -74,14 +73,18 @@ nav a:hover, nav a.active {
     flex-wrap: wrap; /* Responsive for smaller screens */
 }
 
-/* --- Feature Cards (The 3 Divs) --- */
 .feature-card {
     background-color: var(--dark-grey);
+    font-size: 2rem;
+    font-weight: 800;
+    text-transform: uppercase;
     width: 300px;
     height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-color: var(--pure-white);
+    border-width:thick;
     border-radius: 8px;
     border-bottom: 0px solid var(--f1-red);
     transition: var(--transition);
@@ -89,9 +92,17 @@ nav a:hover, nav a.active {
     position: relative;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    background-size:contain;
+    
+    background-position: center;
+    
+    background-repeat: no-repeat;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Hover Effect: The Red Slide-up */
 .feature-card:hover {
     transform: translateY(-10px);
     border-bottom: 8px solid var(--f1-red);
@@ -100,9 +111,6 @@ nav a:hover, nav a.active {
 .feature-card a {
     text-decoration: none;
     color: var(--pure-white);
-    font-size: 1.5rem;
-    font-weight: 800;
-    text-transform: uppercase;
     width: 100%;
     height: 100%;
     display: flex;
@@ -124,8 +132,19 @@ nav a:hover, nav a.active {
     pointer-events: none;
 }
 
+#leader-board {
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/leader-board-image.png');
+    
+    
+}
+#live-simulator{
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/simulator-image.png');
+    
+}
 
-
+#events{
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('static/live-events.png');
+}
 
 /* --- Buttons/Links inside cards --- */
 .feature-card a:hover {
