@@ -356,3 +356,105 @@ input:focus {
     pointer-events: none;
     visibility: hidden;
 }
+
+
+/* --- Core Layout Adjustments --- */
+#content-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap; /* Allows cards to wrap to the next line */
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet & Smaller Desktops (Under 1024px) */
+@media (max-width: 1024px) {
+    .feature-container {
+        gap: 1.5rem;
+        padding: 20px;
+    }
+
+    .feature-card {
+        width: 280px; /* Slightly smaller to fit side-by-side on tablets */
+        height: 350px;
+    }
+}
+
+/* Mobile Devices (Under 768px) */
+@media (max-width: 768px) {
+    /* Header Adjustments */
+    .main-header {
+        flex-direction: column; /* Stack logo and nav */
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    /* Main Content Adjustments */
+    #content-area {
+        flex-direction: column; /* Force vertical stack */
+        padding: 1rem;
+        justify-content: flex-start; /* Start from top on mobile */
+    }
+
+    .feature-container {
+        flex-direction: column;
+        padding: 10px;
+        width: 100%;
+    }
+
+    /* Feature Cards on Mobile */
+    .feature-card {
+        width: 100%; /* Full width cards */
+        max-width: 400px; /* Prevent them from getting too wide on large phones */
+        height: 180px; /* Shorter height for mobile scrolling */
+        font-size: 1.4rem; /* Smaller text for smaller cards */
+        border-width: medium;
+    }
+
+    /* About & Contact Grid Adjustments */
+    .about-grid, .form-row {
+        grid-template-columns: 1fr; /* Stack columns into 1 */
+        gap: 15px;
+    }
+
+    .about-container, .contact-container {
+        padding: 20px 10px;
+    }
+
+    .f1-form {
+        padding: 20px;
+    }
+
+    /* Loader Adjustments for Mobile */
+    .f1-car {
+        font-size: 2rem;
+    }
+}
+
+/* Extra Small Devices (Under 480px) */
+@media (max-width: 480px) {
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .feature-card {
+        height: 150px;
+        font-size: 1.2rem;
+    }
+
+    .feature-card::before {
+        font-size: 3rem; /* Shrink the background 'RACE' text */
+    }
+}
