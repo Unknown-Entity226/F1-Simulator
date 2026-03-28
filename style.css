@@ -84,28 +84,23 @@ nav a:hover, nav a.active {
     justify-content: center;
     align-items: center;
     border-color: var(--pure-white);
-    border-width:thick;
+    border-style: solid;
+    border-width: 1px;
     border-radius: 8px;
-    border-bottom: 0px solid var(--f1-red);
+    /* border-bottom: 0px solid var(--f1-red); */
     transition: var(--transition);
     cursor: pointer;
     position: relative;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     background-size:contain;
-    
     background-position: center;
-    
     background-repeat: no-repeat;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
-    border-bottom: 8px solid var(--f1-red);
+    border: 1px solid var(--f1-red);
 }
 
 .feature-card a {
@@ -457,4 +452,34 @@ input:focus {
     .feature-card::before {
         font-size: 3rem; /* Shrink the background 'RACE' text */
     }
+}
+
+.f1-sprite {
+    width: 120px;
+    height: 40px;
+    /* Vibration effect to simulate engine roar */
+    animation: engineVibration 0.1s infinite alternate;
+}
+
+/* Update the car container to handle the SVG size */
+.f1-car {
+    position: absolute;
+    bottom: 15px; /* Adjust based on your track height */
+    left: -150px;
+    display: flex;
+    align-items: center;
+    animation: driveAcross 1.5s linear infinite;
+}
+
+/* Subtle engine shake */
+@keyframes engineVibration {
+    from { transform: translateY(0); }
+    to { transform: translateY(1.5px); }
+}
+
+/* Adjust smoke to come exactly from the rear wing area */
+.smoke-container {
+    position: absolute;
+    left: 10px; /* Positioned behind the rear wheel */
+    bottom: 5px;
 }
