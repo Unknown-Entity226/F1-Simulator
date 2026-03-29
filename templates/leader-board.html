@@ -1,0 +1,41 @@
+<div class="about-container">
+    <div class="leaderboard-header">
+        <h1><span>GLOBAL</span> LEADERBOARD</h1>
+        
+        <div class="form-group">
+            <select id="leaderboard-filter" class="f1-select">
+                <option value="world-ranking">World Ranking</option>
+                <option value="fastest-laps">Fastest Laps</option>
+                <option value="season-points">Season Points</option>
+                <option value="constructor-standings">Constructors</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="f1-table-wrapper">
+        <table class="leaderboard-table">
+            <thead>
+                <tr>
+                    <th>Pos</th>
+                    <th>Driver</th>
+                    <th>Team</th>
+                    <th>Best Time</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody id="leaderboard-body">
+                <tr class="placeholder-row">
+                    <td>1</td>
+                    <td class="driver-name">Loading Telemetry...</td>
+                    <td>---</td>
+                    <td>0.000s</td>
+                    <td class="points-cell">0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-footer">
+        * Telemetry data provided by F1 Digital Twin API. Last updated: <span id="last-updated">Real-time</span>
+    </div>
+</div>
