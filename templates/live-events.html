@@ -1,44 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>F1 Velocity | Live Events</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header class="main-header">
-        <div class="logo">F1 <span>VELOCITY</span></div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Leaderboard</a></li>
-                <li><a href="simulator.html">Simulator</a></li>
-                <li><a href="live-events.html" class="active">Live Events</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main class="events-container">
-        <h1>Current World Races</h1>
-        
-        <div class="event-card live">
+<div class="about-container"> <h1><span>CURRENT</span> WORLD RACES</h1>
+    
+    <div class="about-grid"> <div class="about-card event-card live">
             <div class="event-info">
-                <span class="badge red">LIVE</span>
-                <h2>Monaco Grand Prix</h2>
+                <span class="badge" style="background: var(--f1-red); padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">LIVE</span>
+                <h2 style="margin-top: 10px;">Monaco Grand Prix</h2>
                 <p>Circuit de Monaco | Lap 45/78</p>
             </div>
+            <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
             <div class="event-stats">
-                <p>Track Temp: 28°C</p>
-                <p>Humidity: 65%</p>
+                <p>Track Temp: <strong>28°C</strong></p>
+                <p>Humidity: <strong>65%</strong></p>
+                <p>Track Condition: <strong>Dry</strong></p>
             </div>
         </div>
 
-        <div class="event-card upcoming">
+        <div class="about-card event-card upcoming" style="border-left-color: #00d2ff;">
             <div class="event-info">
-                <span class="badge blue">UPCOMING</span>
-                <h2>British Grand Prix</h2>
+                <span class="badge" style="background: #00d2ff; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem;">UPCOMING</span>
+                <h2 style="margin-top: 10px;">British Grand Prix</h2>
                 <p>Silverstone Circuit | Starts in 4 Days</p>
             </div>
+            <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+            <p>Historical Winner: <strong>Lewis Hamilton</strong></p>
         </div>
-    </main>
-</body>
-</html>
+
+    </div>
+</div>
+
+<style>
+    /* Page-specific styles that aren't in your main CSS yet */
+    .event-card {
+        transition: transform 0.3s ease;
+    }
+    .event-card:hover {
+        transform: scale(1.02);
+    }
+    .badge {
+        font-weight: 900;
+        letter-spacing: 1px;
+    }
+</style>

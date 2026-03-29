@@ -1,24 +1,82 @@
-<main class="sim-layout">
-    <aside class="controls">
-        <h3>Race Config</h3>
-        <div class="input-group">
-            <label>Weather</label>
-            <select id="weather-type">
-                <option value="dry">Dry / Clear</option>
-                <option value="rain">Intermediates (Rain)</option>
-            </select>
+<div class="dashboard-wrapper animate-fadeIn">
+    <header class="top-nav glass-panel">
+        <div class="race-info">
+            <div class="status-badge" id="raceStatusIndicator">RACE STATUS: <span class="pulse-text">READY</span></div>
+            <div class="lap-counter">
+                <span class="label">LAP</span>
+                <span class="value" id="currentLap">0</span>
+                <span class="total">/ <span id="totalLaps">15</span></span>
+            </div>
         </div>
-        <div class="input-group">
-            <label>Wind: <span id="wind-display">10</span> km/h</label>
-            <input type="range" id="wind-speed" min="0" max="100" value="10">
+        <div class="controls">
+            <button id="startBtn" class="btn-primary">START SIMULATION</button>
+            <button id="pauseBtn" class="btn-secondary" disabled>PAUSE</button>
+            <button id="resetBtn" class="btn-ghost">RESET</button>
         </div>
-        <button id="launch-btn" class="btn-start">Launch Race</button>
-    </aside>
+    </header>
 
-    <section class="viewport">
-        <canvas id="raceCanvas"></canvas>
-        <div class="ai-prediction-overlay">
-            Probability of Win: <span id="prediction-pct">--%</span>
+    <main class="dashboard-grid">
+        <section class="track-panel glass-panel">
+            <div class="panel-header-flex">
+                <h2 class="neon-text">LIVE CIRCUIT POSITION</h2>
+                <button id="playerPitBtn" class="btn-secondary pit-action-btn" disabled>PIT THIS LAP</button>
+            </div>
+            <div class="race-track-container" id="visualTrack">
+                <div class="finish-line"></div>
+                </div>
+        </section>
+
+        <section class="analytics-panel glass-panel">
+            <div class="panel-header">
+                <h2>STRATEGY PREDICTION</h2>
+                <div class="neon-line cyan-line"></div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="lapTimeChart"></canvas>
+            </div>
+
+            <div class="what-if-widget f1-form">
+                <h3>WHAT-IF SIMULATION</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Driver</label>
+                        <select id="simulateDriver" class="f1-input"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>Pit Lap</label>
+                        <input type="number" id="simulateLap" min="1" max="14" value="8" class="f1-input">
+                    </div>
+                </div>
+                <button id="getStrategyBtn" class="btn-primary w-100">CALCULATE TELEMETRY</button>
+                <div id="predictionResult" class="prediction-box">Awaiting data...</div>
+            </div>
+        </section>
+
+        <section class="telemetry-panel glass-panel">
+            <div class="panel-header">
+                <h2>CAR TELEMETRY</h2>
+                <div class="neon-line red-line"></div>
+            </div>
+            <div class="telemetry-grid" id="telemetryGrid">
+                </div>
+        </section>
+    </main>
+</div>
+
+<template id="telemetryCardTemplate">
+    <div class="telemetry-card">
+        <div class="card-header">
+            <h3 class="driver-name">Driver</h3>
+            <div class="speed-display"><span class="speed-val">0</span> KM/H</div>
         </div>
-    </section>
-</main>
+        <div class="stat-bar">
+            <label>TIRES</label>
+            <div class="bar-bg"><div class="bar-fill tire-bar" style="width: 100%"></div></div>
+        </div>
+        <div class="stat-bar">
+            <label>FUEL</label>
+            <div class="bar-bg"><div class="bar-fill fuel-bar" style="width: 100%"></div></div>
+        </div>
+    </div>
+</template>
