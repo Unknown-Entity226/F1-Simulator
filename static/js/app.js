@@ -10,6 +10,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadPage(page, updateURL = true) {
         setLoader(true);
+        if (page === 'simulator') {
+            contentArea.style.display = 'grid';
+            contentArea.style.justifyContent = 'stretch';
+            contentArea.style.alignItems = 'start';
+            if (typeof initSimulator === 'function') {
+        initSimulator();
+            }
+        } else {
+            // Reset to your original Flex settings for Home, Contact, etc.
+            contentArea.style.display = 'flex';
+            contentArea.style.flexDirection = 'column';
+            contentArea.style.justifyContent = 'center';
+            contentArea.style.alignItems = 'center';
+            if (window.activeSim) {
+            window.activeSim.stop();
+        }
+        }
 
         if (page === 'home' || page === '' || page === '/') {
             contentArea.innerHTML = homeHTML;
@@ -22,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // We fetch from the special 'get-content' route to avoid infinite loops
             const response = await fetch(`/get-content/${page}`);
             if (!response.ok) throw new Error('Telemetry lost');
-            
+
             const html = await response.text();
             contentArea.innerHTML = html;
             updateActiveLink(page);
