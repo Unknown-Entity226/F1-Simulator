@@ -422,7 +422,14 @@ input:focus {
         width: 100%;
     }
 }
-
+.dashboard-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
 .dashboard-grid {
     display: flex;
     flex-direction: column;
@@ -432,25 +439,43 @@ input:focus {
 
 .glass-panel {
     background: var(--bg-panel);
+    display: flex;
+    flex-direction: column;
+
     backdrop-filter: blur(12px);
     border: 1px solid var(--border-glow);
     border-radius: 12px;
+    padding: 30px; 
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
 }
-
+.glass-panel {
+    /* Increased padding for a premium feel */
+}
+.top-nav.glass-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers race status, laps, and buttons */
+    text-align: center;
+    padding: 25px;
+    gap: 15px;
+}
 .panel-header-flex {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
-
-.neon-text {
-    font-family: var(--font-heading);
-    letter-spacing: 2px;
-    font-size: 1rem;
+.neon-text, .panel-header h2 {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
 }
-
+.lap-counter .value {
+    font-size: 3rem; /* Make the lap number pop */
+    line-height: 1;
+}
 /* --- Visual Track --- */
 .race-track-container {
     position: relative;
@@ -460,6 +485,29 @@ input:focus {
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
+.race-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.controls .btn-primary, 
+.controls .btn-secondary, 
+.controls .btn-ghost {
+    min-width: 140px; /* Uniform width for symmetry */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 
 .finish-line {
     position: absolute;
@@ -473,15 +521,18 @@ input:focus {
 /* --- Telemetry Cards --- */
 .telemetry-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    width: 100%;}
 
 .telemetry-card {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-glow);
     border-radius: 12px;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 25px;
 }
 
 .speed-val {
@@ -499,8 +550,32 @@ input:focus {
     border-radius: 3px;
     margin-top: 8px;
 }
+.what-if-widget {
+    align-items: center;
+    text-align: center;
+}
 
+.form-row {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.form-group {
+    flex: 1;
+    max-width: 250px;
+}
+
+.f1-input {
+    text-align: center; /* Centers the numbers/text inside inputs */
+}
+
+/* Fix for the visual track spacing */
+.race-track-container {
+    margin: 20px 0;
+    width: 100%;
+}
 .tire-bar { background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
 .fuel-bar { background: var(--f1-red); box-shadow: 0 0 10px var(--f1-red); }
 
-/* --- Chatbot Floating Action Button --- */
